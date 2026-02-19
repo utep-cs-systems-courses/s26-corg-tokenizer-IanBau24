@@ -1,5 +1,5 @@
 # obj list
-OBJS = uimain.o # for now i just listed uimain.o as a file that should exist 
+OBJS = uimain.o tokenizerFunctions.o
 # compiler flags.  -g for debug, -O3 for optimization
 CFLAGS=-g -O3
 

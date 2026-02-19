@@ -1,5 +1,6 @@
 # include <stdio.h>
 # include <string.h>
+# include "tokenizer.h"
 
 int main(){
     while(1){ // run until break (EOF)
@@ -32,6 +33,10 @@ int main(){
         }
         if(match) break; // break if the string passed is exit
 
+
         printf("%s\n",currLine); // print back out what user typed
+
+        char *token = token_start(currLine);
+        printf("\ncurr: %c\n", *token);
     }
 }
