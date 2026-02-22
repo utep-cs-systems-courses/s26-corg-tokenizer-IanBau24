@@ -98,3 +98,27 @@ char **tokenize(char* str){
         }
     return vector;
 }
+
+/* Prints all tokens. */
+void print_tokens(char **tokens){
+    // traverse token vector until the 0
+    for(int i = 0; tokens[i] != 0; i++){
+            printf("%s ", tokens[i]); // call each pointer, it will print a string because it is 0 terminated
+        }
+    printf("\n");
+}
+
+/* Frees all tokens and the vector containing themx. */
+void free_tokens(char **tokens){
+    if(tokens == 0){ // handle calling on an empty vector
+        printf("Trying to free an empty vector, cannot do operation\n");
+        return;
+    }
+
+    for(int i =0; tokens[i] != 0; i++){
+        free(tokens[i]); // frees each pointer to a string
+        // ex: if pointer to "hello" is freed, all the values in the array of chars that make up hello are freed
+        // this is legal because we allocated that pointer and the size of its array back in tokenize using copy_str
+    }
+    free(tokens);
+}
