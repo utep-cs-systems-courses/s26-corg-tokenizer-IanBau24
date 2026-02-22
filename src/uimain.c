@@ -20,12 +20,12 @@ int main(){
         
         currLine[i] = '\0'; // finish current line with string end code
 
-        // TODO turn this exit check into a function
+        // TODO turn this exit check into a function and fix so exited doesn't exit
         // check for exit
-        char *str = "exit";
+        char *exit = "exit";
         short match = 1;
         for(int j = 0; j < i; j++){
-            if(*(currLine + j) != *(str + j)){ // check if they are different
+            if(*(currLine + j) != *(exit + j)){ // check if they are different
                 match = 0; // change match to false
                 break;
             }
@@ -33,10 +33,15 @@ int main(){
         }
         if(match) break; // break if the string passed is exit
 
-
+        
         printf("%s\n",currLine); // print back out what user typed
 
-        char *token = token_start(currLine);
-        printf("\ncurr: %c\n", *token);
+
+        printf("Total tokens in your string: %d\n", count_tokens(currLine));
+        char **tokenizer = tokenize(currLine);
+
+        for(int i = 0; tokenizer[i] != 0; i++){
+            printf("%s\n", tokenizer[i]);
+        }
     }
 }
