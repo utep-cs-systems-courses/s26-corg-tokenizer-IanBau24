@@ -7,9 +7,10 @@ CFLAGS=-g -O3
 all: token # so far i understand this is the name of my build
 
 # ? will add later if necessary
-# # include file dependencies
-# bst.o: bst.h
-# sortargs.o: bst.h
+# include file dependencies
+history.h: history.h
+tokenizer.o: tokenizer.h
+
 
 #? made my build depend on the obj list
 # $@=target, $^=prerequisites

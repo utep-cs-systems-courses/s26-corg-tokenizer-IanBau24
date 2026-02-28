@@ -1,6 +1,7 @@
 # include <stdio.h>
 # include <string.h>
 # include "tokenizer.h"
+# include "history.h"
 
 // this function checks if the string passed is the same as exit
 // if the string passed partially matched exit but ends before exit ex: exi
@@ -23,6 +24,7 @@ short isExit(char *str){
 
 
 int main(){
+    List *myList = init_history();
     while(1){ // run until break (EOF)
         char currLine[100];
         int c, i = 0;
@@ -40,24 +42,29 @@ int main(){
         
         currLine[i] = '\0'; // finish current line with string end code
 
+
         // ? Calls function to check if current string matched exit
         if (i == 4){ // only call function if the string typed in is the same length as exit
             if(isExit(currLine)) break; // break if the string passed is exit
-        } 
+        }
 
+        if (*currLine == '!'){
+            printf("test %s", get_history(myList, *(currLine + 1)));
+        }
 
-        
-        printf("You typed: %s\n",currLine); // print back out what user typed
-
-
-        printf("Total tokens in your string: %d\n", count_tokens(currLine));
+        // TODO fix history so it saves the entire string not just the first char
         char **tokenizer = tokenize(currLine);
 
-        printf("Reading tokenizer vector pointer by pointer: ");
-        print_tokens(tokenizer);
-
+        // pass the head of the linked list and add each str to a new node
+        for(int i = 0; i < count_tokens(currLine); i++){
+	  add_history(myList, tokenizer[i]);
+	}
+        printf("\n testing prinhistory ------\n");
+        print_history(myList);
         printf("Freeing the vector and all it's pointers...\n");
         free_tokens(tokenizer);
         printf("Done\n");
+
+
     }
 }
