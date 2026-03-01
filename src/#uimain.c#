@@ -8,15 +8,13 @@
 // the function will still return true
 short isExit(char *str){
   char * exitStr = "exit";
-
   while(*str && *exitStr){ // loop breaks when either reaches 0
     if(*str != *exitStr) return 1; // return 1 at first difference between strings
     str++;
     exitStr++;
   }
   return (*str == '\0' && *exitStr == '\0') ? 0: 1; // check if the loop broke because they are both 0  or if only fone is 0
-  // ! running this program on emacs shell will break of out the entire program when exit is typed
-  // use strcmp to get desired result when using emacs shell
+
     // printf("strcmp %d", strcmp("exit", str));
     // return strcmp("exit", str);
 }
@@ -45,7 +43,6 @@ int main(){
         currLine[i] = '\0'; // finish current line with string end code
 
 
-
         // ? Calls function to check if current string matched exit
 	    if(!isExit(currLine)) break;
 
@@ -60,6 +57,8 @@ int main(){
         for(int i = 0; i < count_tokens(currLine); i++){
 	  add_history(myList, tokenizer[i]);
 	}
+        printf("\n testing prinhistory ------\n");
+        print_history(myList);
         printf("Freeing the vector and all it's pointers...\n");
         free_tokens(tokenizer);
         printf("Done\n");
